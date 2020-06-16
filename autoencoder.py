@@ -1,7 +1,7 @@
 import numpy as np
-from tensorflow import set_random_seed
 from keras.layers import Input, Dense
 from keras.models import Model
+import tensorflow
 import keras
 import os
 
@@ -9,7 +9,7 @@ import os
 #  to have a more consistent testing environment
 def seedy(s):
     np.random.seed(s)
-    set_random_seed(s)
+    tensorflow.random.set_seed(s)
 
 # encoding dimension is the size of the compressed layer
 class AutoEncoder:
@@ -21,8 +21,8 @@ class AutoEncoder:
     
     def _encoder(self):
         inputs = Input(shape=(self.x[0].shape))
-        encoded = Dense(self.encoding_dim, activation='relu')
-        model = Model(inputs, encoded)
+        encoded = Dense(self.encoding_dim, activation='relu')(inputs)
+        model = Model(inputs=inputs, outputs=encoded)
         self.encoder = model
         return model
     
