@@ -1,5 +1,7 @@
 import numpy as np
 from tensorflow import set_random_seed
+from keras.layers import Input, Dense
+from keras.models import Model
 
 #  set the random seed for numpy and tensorflow backend
 #  to have a more consistent testing environment
@@ -15,4 +17,10 @@ class AutoEncoder:
         self.x = np.array([[r(), r(), r()] for _ in range(1000)])
         print(self.x)
     
-
+    def _encoder(self):
+        inputs = Input(shape=(self.x[0].shape))
+        encoded = Dense(self.encoding_dim, activation='relu')
+        model = Model(inputs, encoded)
+        self.encoder = model
+        return model
+        
