@@ -2,6 +2,7 @@ import numpy as np
 from tensorflow import set_random_seed
 from keras.layers import Input, Dense
 from keras.models import Model
+import keras
 import os
 
 #  set the random seed for numpy and tensorflow backend
@@ -10,7 +11,7 @@ def seedy(s):
     np.random.seed(s)
     set_random_seed(s)
 
-# encoding dimension is the length of input data
+# encoding dimension is the size of the compressed layer
 class AutoEncoder:
     def __init__(self, encoding_dim=3):
         self.encoding_dim = encoding_dim
@@ -60,3 +61,10 @@ class AutoEncoder:
             self.encoder.save(r'./weights/encoder_weights.h5')
             self.decoder.save(r'./weights/decoder_weights/h5')
             self.model.save(r'./weights/ae_weights/h5')
+
+if __name__ == '__main__':
+    seedy(2)
+    ae = AutoEncoder(encoding_dim=2)
+    ae.encoder_decoder()
+    ae.fit(batch_size=50, epochs=300)
+    ae.save()
