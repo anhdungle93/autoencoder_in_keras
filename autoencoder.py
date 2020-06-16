@@ -43,3 +43,11 @@ class AutoEncoder:
         self.model = model
         return model
 
+    def fit(self, batch_size=10, epochs=300):
+        self.model.compile(optimizer='sgd', loss='mse')
+        log_dir = './log/'
+        tbCallBack = keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=0, write_graph=True, write_images=True)
+        self.model.fit(self.x, self.x,
+                        epochs=epochs,
+                        batch_size=batch_size,
+                        callbacks=[tbCallBack])
