@@ -59,8 +59,8 @@ class AutoEncoder:
             os.mkdir(r'./weights')
         else:
             self.encoder.save(r'./weights/encoder_weights.h5')
-            self.decoder.save(r'./weights/decoder_weights/h5')
-            self.model.save(r'./weights/ae_weights/h5')
+            self.decoder.save(r'./weights/decoder_weights.h5')
+            self.model.save(r'./weights/ae_weights.h5')
 
 if __name__ == '__main__':
     seedy(2)
