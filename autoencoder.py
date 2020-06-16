@@ -31,3 +31,15 @@ class AutoEncoder:
         self.decoder = model
         return model
     
+    def encoder_decoder(self):
+        ec = self._encoder()
+        dc = self._decoder()
+
+        inputs = Input(shape=self.x[0].shape)
+        ec_out = ec(inputs)
+        dc_out = dc(ec_out)
+        model = Model(inputs, dc_out)
+
+        self.model = model
+        return model
+
