@@ -2,6 +2,7 @@ import numpy as np
 from tensorflow import set_random_seed
 from keras.layers import Input, Dense
 from keras.models import Model
+import os
 
 #  set the random seed for numpy and tensorflow backend
 #  to have a more consistent testing environment
@@ -51,3 +52,11 @@ class AutoEncoder:
                         epochs=epochs,
                         batch_size=batch_size,
                         callbacks=[tbCallBack])
+    
+    def save(self):
+        if not os.path.exists(r'./weights'):
+            os.mkdir(r'./weights')
+        else:
+            self.encoder.save(r'./weights/encoder_weights.h5')
+            self.decoder.save(r'./weights/decoder_weights/h5')
+            self.model.save(r'./weights/ae_weights/h5')
