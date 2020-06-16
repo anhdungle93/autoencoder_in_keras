@@ -23,4 +23,11 @@ class AutoEncoder:
         model = Model(inputs, encoded)
         self.encoder = model
         return model
-        
+    
+    def _decoder(self):
+        inputs = Input(shape=(self.encoding_dim,))
+        decoded = Dense(3)(inputs)
+        model = Model(inputs, decoded)
+        self.decoder = model
+        return model
+    
